@@ -424,13 +424,13 @@
     <header>
         <div class="container header-content">
             <div class="profile-img-container">
-                <!-- Placeholder para foto - substitua pelo caminho da sua foto -->
-                <div class="profile-img-placeholder" id="photoPlaceholder">
-                    <i class="fas fa-user"></i>
-                    <span>Adicione sua foto</span>
-                </div>
-                <img src="fotos/Cleiton.jpg" alt="Cleiton Ernesto Cumbane" class="profile-img" id="profilePhoto" style="display: none;">
-            </div>
+            <img src="fotos/Cleiton.jpg"
+               alt="Cleiton Ernesto Cumbane"
+               class="profile-img">
+        </div>
+
+                
+            
             <h1>CLEITON ERNESTO CUMBANE</h1>
             <div class="subtitle">Engenheiro Eletrónico e de Telecomunicações</div>
             
@@ -612,91 +612,40 @@
         </div>
     </footer>
 
-    <script>
-        // Função para simular carregamento de foto (substitua pelo caminho real da sua foto)
-        function loadProfilePhoto() {
-            // Substitua esta linha pelo caminho real da sua foto
-            // Exemplo: const photoPath = "minha-foto.jpg";
-            const photoPath = "";
-            
-            if (photoPath) {
-                const profilePhoto = document.getElementById('profilePhoto');
-                const placeholder = document.getElementById('photoPlaceholder');
-                
-                profilePhoto.src = photoPath;
-                profilePhoto.style.display = 'block';
-                placeholder.style.display = 'none';
-                
-                // Adicionar tratamento de erro caso a imagem não carregue
-                profilePhoto.onerror = function() {
-                    profilePhoto.style.display = 'none';
-                    placeholder.style.display = 'flex';
-                    console.error("Erro ao carregar a foto. Verifique o caminho.");
-                };
+  
+        
+       <script>
+    function animateOnScroll() {
+        const elements = document.querySelectorAll(
+            '.timeline-item, .skill-card, .language-item'
+        );
+
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+
+            if (elementPosition < screenPosition) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
             }
-        }
-        
-        // Função para animar elementos ao rolar a página
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.timeline-item, .skill-card, .language-item');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        }
-        
-        // Inicializar estilos de animação
-        document.addEventListener('DOMContentLoaded', function() {
-            // Configurar animações iniciais
-            const animatedElements = document.querySelectorAll('.timeline-item, .skill-card, .language-item');
-            animatedElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            });
-            
-            // Carregar foto (se houver)
-            loadProfilePhoto();
-            
-            // Adicionar evento de scroll para animações
-            window.addEventListener('scroll', animateOnScroll);
-            
-            // Executar uma vez no carregamento para elementos já visíveis
-            animateOnScroll();
         });
-        
-        // Função para simular upload de foto (para demonstração)
-        document.getElementById('photoPlaceholder').addEventListener('click', function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(event) {
-                        const profilePhoto = document.getElementById('profilePhoto');
-                        const placeholder = document.getElementById('photoPlaceholder');
-                        
-                        profilePhoto.src = event.target.result;
-                        profilePhoto.style.display = 'block';
-                        placeholder.style.display = 'none';
-                    };
-                    
-                    reader.readAsDataURL(file);
-                }
-            };
-            
-            input.click();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const animatedElements = document.querySelectorAll(
+            '.timeline-item, .skill-card, .language-item'
+        );
+
+        animatedElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         });
-    </script>
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll();
+    });
+</script>
+
 </body>
 </html>
